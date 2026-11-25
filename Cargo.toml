@@ -1,0 +1,10 @@
+[package]
+name = "jezz-template-rust"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "JBC Edition 1.3 compliant Rust starter with closed Serde schemas, Z3-provable contracts, and property tests."
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

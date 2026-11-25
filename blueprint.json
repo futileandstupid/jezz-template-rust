@@ -1,0 +1,213 @@
+{
+  "schema_version": "1.3",
+  "title": "rust Blueprint",
+  "profile": "standard",
+  "rooms": [
+    {
+      "room_id": "domain",
+      "label": "domain",
+      "member_id": ".",
+      "language": "rust",
+      "wall_rating": "compartment_wall",
+      "module_count": 1,
+      "max_modules": 35,
+      "public_symbol_count": 7,
+      "breaker_count": 5,
+      "topological_rank": 1,
+      "redline_status": "existing"
+    },
+    {
+      "room_id": "gateway",
+      "label": "gateway",
+      "member_id": ".",
+      "language": "rust",
+      "wall_rating": "compartment_wall",
+      "module_count": 1,
+      "max_modules": 35,
+      "public_symbol_count": 1,
+      "breaker_count": 1,
+      "topological_rank": 0,
+      "redline_status": "existing"
+    },
+    {
+      "room_id": "root",
+      "label": "root",
+      "member_id": ".",
+      "language": "rust",
+      "wall_rating": "package_lobby",
+      "module_count": 1,
+      "max_modules": 35,
+      "public_symbol_count": 0,
+      "breaker_count": 0,
+      "topological_rank": 0,
+      "redline_status": "existing"
+    }
+  ],
+  "walls": [
+    {
+      "wall_id": "wall:domain:envelope",
+      "room_id": "domain",
+      "adjacent_room_id": "",
+      "rating": "compartment_wall",
+      "thickness_px": 2
+    },
+    {
+      "wall_id": "wall:gateway:envelope",
+      "room_id": "gateway",
+      "adjacent_room_id": "",
+      "rating": "compartment_wall",
+      "thickness_px": 2
+    },
+    {
+      "wall_id": "wall:root:envelope",
+      "room_id": "root",
+      "adjacent_room_id": "",
+      "rating": "package_lobby",
+      "thickness_px": 1
+    },
+    {
+      "wall_id": "wall:domain|gateway",
+      "room_id": "domain",
+      "adjacent_room_id": "gateway",
+      "rating": "compartment_wall",
+      "thickness_px": 2
+    }
+  ],
+  "port_pins": [
+    {
+      "pin_id": "domain::in:AccountId",
+      "room_id": "domain",
+      "symbol_name": "AccountId",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "domain::in:SettlementError",
+      "room_id": "domain",
+      "symbol_name": "SettlementError",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "domain::in:SettlementQuote",
+      "room_id": "domain",
+      "symbol_name": "SettlementQuote",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "domain::in:SettlementRequest",
+      "room_id": "domain",
+      "symbol_name": "SettlementRequest",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "domain::in:build_settlement_quote",
+      "room_id": "domain",
+      "symbol_name": "build_settlement_quote",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "domain::in:net_after_fee",
+      "room_id": "domain",
+      "symbol_name": "net_after_fee",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "domain::in:parse",
+      "room_id": "domain",
+      "symbol_name": "parse",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "gateway::in:parse_and_quote_json",
+      "room_id": "gateway",
+      "symbol_name": "parse_and_quote_json",
+      "direction": "inbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    },
+    {
+      "pin_id": "gateway::out:domain",
+      "room_id": "gateway",
+      "symbol_name": "out->domain",
+      "direction": "outbound_port",
+      "has_circuit_breaker": true,
+      "redline_status": "existing"
+    }
+  ],
+  "circuit_breakers": [
+    {
+      "breaker_id": "domain::cb:SettlementQuote",
+      "room_id": "domain",
+      "symbol_name": "SettlementQuote",
+      "guard_kind": "strict_schema"
+    },
+    {
+      "breaker_id": "domain::cb:SettlementRequest",
+      "room_id": "domain",
+      "symbol_name": "SettlementRequest",
+      "guard_kind": "strict_schema"
+    },
+    {
+      "breaker_id": "domain::cb:build_settlement_quote",
+      "room_id": "domain",
+      "symbol_name": "build_settlement_quote",
+      "guard_kind": "boundary_guard"
+    },
+    {
+      "breaker_id": "domain::cb:net_after_fee",
+      "room_id": "domain",
+      "symbol_name": "net_after_fee",
+      "guard_kind": "boundary_guard"
+    },
+    {
+      "breaker_id": "domain::cb:parse",
+      "room_id": "domain",
+      "symbol_name": "parse",
+      "guard_kind": "boundary_guard"
+    },
+    {
+      "breaker_id": "gateway::cb:parse_and_quote_json",
+      "room_id": "gateway",
+      "symbol_name": "parse_and_quote_json",
+      "guard_kind": "boundary_guard"
+    }
+  ],
+  "buses": [
+    {
+      "bus_id": "gateway->domain",
+      "source_room": "gateway",
+      "target_room": "domain",
+      "port_symbols": [
+        "build_settlement_quote"
+      ],
+      "call_count": 1,
+      "has_breaker_guard": true,
+      "redline_status": "existing"
+    }
+  ],
+  "external_risers": [
+    {
+      "riser_id": "domain=>riser:external_package:serde",
+      "room_id": "domain",
+      "kind": "external_package",
+      "target_name": "serde",
+      "redline_status": "existing"
+    }
+  ],
+  "invariant_pins": [],
+  "redlines": [],
+  "netlist_digest": "sha256:d62c8a58da3fe0a57822e77efdaf59a1c18388a67a67422324af06e9ea77c1ee"
+}
