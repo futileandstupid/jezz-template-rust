@@ -12,7 +12,7 @@ Turnkey **Rust (`edition = "2021"`)** starter repository governed by the **Jezz 
 ## Quickstart
 
 ```bash
-uvx --from git+https://github.com/futileandstupid/jezz@v0.6.0 jezz init my-rust-crate --scaffold rust
+uvx --from git+https://github.com/futileandstupid/jezz@v0.6.1 jezz init my-rust-crate --scaffold rust
 cd my-rust-crate
 cargo test
 ```
@@ -20,7 +20,7 @@ cargo test
 ## Statutory Gates
 
 ```bash
-uvx --from git+https://github.com/futileandstupid/jezz@v0.6.0 jezz inspect .
-uvx --from git+https://github.com/futileandstupid/jezz@v0.6.0 jezz prove . --require-deductive
-uvx --from git+https://github.com/futileandstupid/jezz@v0.6.0 jezz blueprint . --verify-target blueprint.json --write-html blueprint.html
+uvx --from git+https://github.com/futileandstupid/jezz@v0.6.1 jezz inspect .
+uvx --from git+https://github.com/futileandstupid/jezz@v0.6.1 jezz prove . --require-deductive
+uvx --from git+https://github.com/futileandstupid/jezz@v0.6.1 jezz blueprint . --verify-target blueprint.json --write-html blueprint.html
 ```
